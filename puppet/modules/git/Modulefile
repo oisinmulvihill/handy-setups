@@ -1,0 +1,8 @@
+name    'ploperations-git'
+version '0.0.1'
+source 'https://github.com/puppetlabs-operations/puppet-git'
+author 'Puppet Labs Operations'
+license 'Apache License, Version 2.0'
+summary 'Provide basic git packages'
+description 'Provide basic git packages'
+project_page 'https://github.com/puppetlabs-operations/puppet-git'

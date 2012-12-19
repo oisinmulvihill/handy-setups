@@ -1,0 +1,26 @@
+{
+  "name": "portertech-mongodb",
+  "version": "0.1.1",
+  "source": "UNKNOWN",
+  "author": "portertech",
+  "license": "UNKNOWN",
+  "summary": "UNKNOWN",
+  "description": "UNKNOWN",
+  "project_page": "UNKNOWN",
+  "dependencies": [
+
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "Modulefile": "91734dd40701f75d3bb542043589218c",
+    "README": "5d12412c2cac335de9dfbd617d34df12",
+    "Vagrantfile": "f14612158908256adc088f841eddd473",
+    "manifests/init.pp": "40337ec6869ac2f0a4f7bd1e4cb1230f",
+    "manifests/params.pp": "b33ad88bc1dc3d3c77dfa4d87fea9ddd",
+    "templates/mongodb.conf.erb": "fe23e5219ce4e3811ad57588309ac5ac",
+    "tests/init.pp": "c29e4762855114f0111961d495abcf65",
+    "tests/vagrant.pp": "dcc754b4d5a193cc4ccd88eb4af0611e"
+  }
+}
