@@ -19,13 +19,13 @@ stacks" I'm developing with or interested in. I'm slowly going to move in set
 ups I'm using which I can make public. This should help others interested in
 Puppet and Vagrant. It maybe even inspire them to improve my puppet knowledge.
 
-Vagrant is great for managing virtual machine images. I use it in addition to
-Puppet which provisions (sets up) dependancies and project specifics. Puppet
-modules and manifest files provides the technical "how to" needed to create and
-re-create a specific set up. More generally, this approach can allow a team of
-developers to share a common environment. Which can save countless man hours of
-set up. The automated set up allows you to concentrate on development and not
-the annoying business of environment set up.
+Vagrant is great for managing virtual machine images. I use it with
+Puppet which provisions dependancies and project specifics. Puppet modules and
+manifest files provides the technical "how to" needed to create and re-create a
+specific set up. More generally, this approach can allow a team of developers to
+share a common environment. Which can save countless man hours of set up. The
+automated set up allows you to concentrate on development and not the annoying
+business of environment set up.
 
 
 Quick Start
