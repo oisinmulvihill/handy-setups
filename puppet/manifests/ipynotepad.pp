@@ -32,7 +32,7 @@ Class["ipy_notepad"]
 # What modules to include on this machine:
 #
 # the include order doesn't matter. The important thing is that an included
-# module is included in the above order of install.
+# module is included in the above 'order of install'.
 #
 include user_settings
 include rcs_deps

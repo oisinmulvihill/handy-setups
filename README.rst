@@ -29,6 +29,14 @@ set up. The automated machine set up allows you to concentrate on development
 over the annoying business of environment set up.
 
 
+Quick Start
+-----------
+
+ * Choose a devbox.
+ * Change into the devboxes directory on the command line.
+ * Call "vagrant up" to start the machine.
+
+
 Prerequisits
 ------------
 
@@ -131,24 +139,40 @@ machine at a time.
 ipynotepad
 ~~~~~~~~~~
 
-This provisions a box with IPy Notepad running out of the box. This has Pandas,
-Matplotlib & Numpy install and useable right away.
+A machine to do mathematical work. It provides IPy Notepad running matplotlib,
+pandas, numpy and other tools.
 
-After the provision completes open your browser to::
+Create the notebook folder in your home directory (on the host machine)::
 
-    # http://notebook.example.com:10080
-    open http://notebook.example.com:10080
+    mkdir ~/notebook
 
-OR::
+Now from the ipynotepad directory start the machine::
 
-    # if you don't have /etc/hosts set up:
-    open http://192.168.43.176:10080
+    vagrant up
 
+This will take a few minutes as it download and provisions the machine. When
+the command complete you can open your web browser and go to:
 
-Required
-````````
+    http://192.168.43.176:10080/
 
-The notebook folder in your hostmachines home directory::
+Or, If you set up the /etc/hosts with local dns set up:
 
-    mkdir -p ~/notebook
+    http://notepad.example.com:10080
 
+Handy OSX Command line::
+
+    open http://192.168.43.176:10080/
+
+Now, click on the "New notebook" button. In the main right hand side type the
+following into a "cell" and press shift-enter to execute::
+
+    x = randn(10000)
+    hist(x, 100)
+
+Have a look a matplotlib gallery. You can paste any of the demo's source code
+into a cell and execute it.
+
+ * http://matplotlib.org/gallery.html
+
+If the machine is destroyed / recreated the notebooks will still be preserved
+on the host computer.

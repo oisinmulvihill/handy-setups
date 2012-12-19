@@ -30,7 +30,7 @@ Vagrant::Config.run do |config|
 
   config.vm.boot_mode = :gui
   config.vm.host_name = "notepad"
-  config.vm.network :hostonly, "192.168.57.10"
+  config.vm.network :hostonly, "192.168.43.176"
 
   # mount the puppet files used to configure services and other things:
   config.vm.share_folder "files", "/vagrant/files", "../puppet/files"
