@@ -9,11 +9,10 @@ Introduction
 
 In August 2012 I decided use virtual machines entirely for my development
 environments. Previously I would set up a project's dependancies directly
-on my Mac laptop. This can prove quite painful as most of the dependancies
-compile best on Linux. This choice proved itself in other ways, when I changed
-laptop. I was able to get back to being productive in a very short period of
-time on a new machine. I've since extended this approach to all machines I
-work on.
+on my Mac laptop. This could prove quite painful as most of the dependancies
+compile best on Linux. This choice proved itself in other ways on changing
+laptop. I was able to get back to being productive in a very short time. I've
+since extended this approach to all machines I work on.
 
 This project sets up (provisions) a blank Ubuntu machines with "technology
 stacks" I'm developing with or interested in. I'm slowly going to move in set
@@ -22,11 +21,11 @@ Puppet and Vagrant. It maybe even inspire them to improve my puppet knowledge.
 
 Vagrant is great for managing virtual machine images. I use it in addition to
 Puppet which provisions (sets up) dependancies and project specifics. Puppet
-modules and manifest files provides the technical "how to" need to create and
+modules and manifest files provides the technical "how to" needed to create and
 re-create a specific set up. More generally, this approach can allow a team of
 developers to share a common environment. Which can save countless man hours of
-set up. The automated machine set up allows you to concentrate on development
-over the annoying business of environment set up.
+set up. The automated set up allows you to concentrate on development and not
+the annoying business of environment set up.
 
 
 Quick Start
@@ -139,8 +138,8 @@ machine at a time.
 ipynotepad
 ~~~~~~~~~~
 
-A machine to do mathematical work. It provides IPy Notepad running matplotlib,
-pandas, numpy and other tools.
+A machine to do mathematical work on. It provides IPy Notepad running
+matplotlib, pandas, numpy and other tools.
 
 Create the notebook folder in your home directory (on the host machine)::
 
