@@ -139,7 +139,7 @@ machine at a time.
 meteorjs
 ~~~~~~~~
 
-This create a machine with MongoDB and Meteor installed ready to start
+This creates an ubuntu machine with MongoDB & Meteor installed ready to start
 development on. Internet access is needed for this machine to be provisioned.
 
 From the meteorjs directory start the machine::
@@ -165,6 +165,8 @@ Once the machine is running you can test the set up as follows::
 
     # linux:
     firefox http://meteor.example.com
+
+    # profit!
 
 
 ipynotepad
