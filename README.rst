@@ -130,9 +130,21 @@ Development Boxes
 Add the following name(s) to your local /etc/hosts set up for machines::
 
     192.168.43.176    notebook notebook.example.com
+    192.168.43.178    meteor meteor.example.com
 
 Don't try and set up two machines at the same time. Only do "vagrant up" one
 machine at a time.
+
+
+meteorjs
+~~~~~~~~
+
+This create a machine with MongoDB and Meteor installed ready to start
+development on. Internet access is needed for this machine to be provisioned.
+
+From the meteorjs directory start the machine::
+
+    vagrant up
 
 
 ipynotepad
