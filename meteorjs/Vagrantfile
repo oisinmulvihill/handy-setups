@@ -29,7 +29,7 @@ Vagrant::Config.run do |config|
   config.vm.share_folder "v-cache", "/var/cache/apt/archives/", cache_dir
 
   config.vm.boot_mode = :gui
-  config.vm.host_name = "notepad"
+  config.vm.host_name = "meteor"
   config.vm.network :hostonly, "192.168.43.178"
 
   # mount the puppet files used to configure services and other things:
@@ -43,7 +43,7 @@ Vagrant::Config.run do |config|
   # config.vm.provision :puppet do |puppet|
     puppet.manifests_path = ENV['PUPPET_MANIFESTS'] || "../puppet/manifests"
     puppet.module_path = ENV['MODULE_PATH'] || "../puppet/modules"
-    puppet.manifest_file  = "meteor.pp"
+    puppet.manifest_file  = "meteorjs.pp"
   end
 
 end

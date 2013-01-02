@@ -1,5 +1,6 @@
 # Install meteor from the web ready to start development.
 #
+# Reference:
 #  * http://docs.meteor.com/
 #
 # Oisin Mulvihill
@@ -10,7 +11,7 @@ class meteorjs {
 
     exec {
         "meteor-curl-install":
-            command => "curl https://install.meteor.com | /bin/sh",
+            command => "su -c 'curl https://install.meteor.com | /bin/sh'",
             path => "/bin:/usr/bin:/usr/local/bin",
     }
 
