@@ -20,7 +20,7 @@ class meteorjs {
     }
 
     # Proxy the default localhost:3000 meteor port. Connecting to the hostname
-    # meteor.example.com -> localhost:3000
+    # meteor.example.com will connect to localhost:3000 (if its running).
     nginx::resource::upstream {'meteor-proxy':
         ensure  => present,
         members => [

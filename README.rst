@@ -146,6 +146,26 @@ From the meteorjs directory start the machine::
 
     vagrant up
 
+Once the machine is running you can test the set up as follows::
+
+    # connect to the machine
+    vagrant ssh
+
+    # Create the default meteor project:
+    meteor create test1
+    cd test1
+    meteor
+
+    # Now, on your host machine open your browser and connect
+    #
+    # (Requires the /etc/hosts 'meteor.example.com' set up)
+    #
+    # mac:
+    open http://meteor.example.com
+
+    # linux:
+    firefox http://meteor.example.com
+
 
 ipynotepad
 ~~~~~~~~~~
