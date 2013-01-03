@@ -8,4 +8,5 @@ dist
 *.egg-info*
 *.pyc
 *.db
+meteorjs/mnt
 puppet/manifests/distribute-*gz

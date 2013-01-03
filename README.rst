@@ -169,6 +169,28 @@ Once the machine is running you can test the set up as follows::
     # profit!
 
 
+NFS: Edit code from Host machine
+````````````````````````````````
+I like to edit code using Sublime Text on my OSX host. I use NFS to edit files
+directly on the machine. This I've found is more reliable then samba sharing.
+I've not enabled it by default as NFS needs to be available on the host and
+sudo permission is required. Vagrant needs this to edit the NFS exports file.
+
+If you want to use NFS you can set the environment variable USE_NFS=1 for
+example::
+
+    # If the machine isn't running already:
+    USE_NFS=1 vagrant up
+
+    # Restart a running box to use:
+    USE_NFS=1 vagrant reload
+
+The folder mnt/ inside the meteorjs directory (on the host) will be mounted
+at /home/vagrant/mnt on the dev box. This will allow you to use your favorite
+editor on the Mac/Linux host, to edit files under mnt/ available directly on
+the box.
+
+
 ipynotepad
 ~~~~~~~~~~
 

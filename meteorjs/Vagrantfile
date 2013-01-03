@@ -39,6 +39,10 @@ Vagrant::Config.run do |config|
   # can be used to copy in ssh keys and other set up needed to checkout code.
   config.vm.share_folder "dev_home", "/home/vagrant/dev_home", ENV['HOME'] #, { :nfs => true,  }
 
+  if ENV['USE_NFS'] == "1"
+    config.vm.share_folder "host_mnt", "/home/vagrant/mnt", 'mnt', { :nfs => true, :create => true }
+  end
+
   config.vm.provision :puppet, :options => "--verbose --debug" do |puppet|
   # config.vm.provision :puppet do |puppet|
     puppet.manifests_path = ENV['PUPPET_MANIFESTS'] || "../puppet/manifests"
