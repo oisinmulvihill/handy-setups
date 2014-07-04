@@ -31,14 +31,14 @@ business of environment set up.
 Quick Start
 -----------
 
- * Edit the $HOME/devops.ini and add the ipynotepad settings::
+* Edit the $HOME/devops.ini and add the ipynotepad settings::
 [ipynotepad]
 address=192.168.67.39
 box_url=https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
 box_img=trusty-server-cloudimg-amd64-vagrant-disk1.box
- * Change into "ipynotepad" directory.
- * Call "./box up" to start the machine.
- * On your host machine open http://www.ipynotepad/ and off you go.
+* Change into "ipynotepad" directory.
+* Call "./box up" to start the machine.
+* On your host machine open http://www.ipynotepad/ and off you go.
 
 Prerequisits
 ------------
