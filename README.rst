@@ -1,5 +1,5 @@
-Handy Vagrant + Puppet Development Environment Configuration
-============================================================
+Handy Vagrant + Saltstack Development Environments
+==================================================
 
 .. contents::
 
@@ -17,11 +17,11 @@ since extended this approach to all machines I work on.
 This project sets up (provisions) a blank Ubuntu machines with "technology
 stacks" I'm developing with or interested in. I'm slowly going to move in set
 ups I'm using which I can make public. This should help others interested in
-Puppet and Vagrant. It maybe even inspire them to improve my puppet knowledge.
+Saltsack and Vagrant. It maybe even inspire them to improve my Saltsack knowledge.
 
 Vagrant is great for managing virtual machine images. I use it with
-Puppet which provisions dependancies and project specifics. Puppet modules and
-manifest files provides the technical "how to" needed to create and re-create a
+Saltsack which provisions dependancies and project specifics. Saltsack states and
+formulae provide the technical "how to" needed to create and re-create a
 specific set up. More generally, this approach can allow a team of developers to
 share a common environment. Which can save countless man hours of set up. The
 automated set up allows you to concentrate on development and not the annoying
@@ -31,13 +31,24 @@ business of environment set up.
 Quick Start
 -----------
 
- * Choose a devbox.
- * Change into the devboxes directory on the command line.
- * Call "vagrant up" to start the machine.
+* Edit the $HOME/devops.ini and add the ipynotepad settings::
+
+    [ipynotepad]
+    address=192.168.67.39
+    box_url=https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
+    box_img=trusty-server-cloudimg-amd64-vagrant-disk1.box
+
+* Change into "ipynotepad" directory.
+
+* Call "./box up" to start the machine.
+
+* On your host machine open http://www.ipynotepad/ and off you go.
 
 
-Prerequisits
-------------
+Needed
+------
+
+You need virtualbox and vagrant installed on your host machine.
 
 VirtualBox
 ~~~~~~~~~~
@@ -45,6 +56,7 @@ VirtualBox
 Download VirtualBox and Extension Pack:
 
  * https://www.virtualbox.org/wiki/Downloads
+ * VirtualBox 4.3.10 and extensions: https://www.virtualbox.org/wiki/Downloads
 
 
 Vagrant
@@ -53,7 +65,7 @@ Vagrant
 Vagrant is used to mange virtualbox. It needs VirtualBox installed prior to
 use.
 
- * http://vagrantup.com/v1/docs/getting-started/index.html
+ * Vagrant 1.6.0: http://www.vagrantup.com/downloads.html
 
 The following aliases are handy to add to your .bash_profile or .bashrc::
 
@@ -68,15 +80,6 @@ The following aliases are handy to add to your .bash_profile or .bashrc::
     alias vssh="vagrant ssh"
 
 This will save lots of typing.
-
-
-Ubuntu Base Box
-~~~~~~~~~~~~~~~
-
-Currently I'm using an Ubuntu Precise32 basebox from http://www.vagrantbox.es/.
-To add this box do the following after vagrant is set up::
-
-    vagrant box add precise32 http://files.vagrantup.com/precise32.box
 
 
 Common Vagrant Commands
@@ -115,104 +118,24 @@ stop::
     vagrant halt
 
 
-Handy Documentation
-~~~~~~~~~~~~~~~~~~~
-
- * http://docs.puppetlabs.com/learning
- * http://bombasticmonkey.com/2011/12/27/stop-writing-puppet-modules-that-suck
- * http://nefariousdesigns.co.uk/vagrant-virtualised-dev-environments.html
- * http://www.12factor.net/dev-prod-parity
-
-
-Development Boxes
------------------
-
-Add the following name(s) to your local /etc/hosts set up for machines::
-
-    192.168.43.176    notebook notebook.example.com
-    192.168.43.178    meteor meteor.example.com
-
-Don't try and set up two machines at the same time. Only do "vagrant up" one
-machine at a time.
-
-
-meteorjs
-~~~~~~~~
-
-This creates an ubuntu machine with MongoDB & Meteor installed ready to start
-development on. Internet access is needed for this machine to be provisioned.
-
-From the meteorjs directory start the machine::
-
-    vagrant up
-
-Once the machine is running you can test the set up as follows::
-
-    # connect to the machine
-    vagrant ssh
-
-    # Create the default meteor project:
-    meteor create test1
-    cd test1
-    meteor
-
-    # Now, on your host machine open your browser and connect
-    #
-    # (Requires the /etc/hosts 'meteor.example.com' set up)
-    #
-    # mac:
-    open http://meteor.example.com
-
-    # linux:
-    firefox http://meteor.example.com
-
-    # profit!
-
-
-NFS: Edit code from Host machine
-````````````````````````````````
-I like to edit code using Sublime Text on my OSX host. I use NFS to edit files
-directly on the machine. This I've found is more reliable then samba sharing.
-I've not enabled it by default as NFS needs to be available on the host and
-sudo permission is required. Vagrant needs this to edit the NFS exports file.
-
-If you want to use NFS you can set the environment variable USE_NFS=1 for
-example::
-
-    # If the machine isn't running already:
-    USE_NFS=1 vagrant up
-
-    # Restart a running box to use:
-    USE_NFS=1 vagrant reload
-
-The folder mnt/ inside the meteorjs directory (on the host) will be mounted
-at /home/vagrant/mnt on the dev box. This will allow you to use your favorite
-editor on the Mac/Linux host, to edit files under mnt/ available directly on
-the box.
-
 
 ipynotepad
-~~~~~~~~~~
+----------
 
 A machine to do mathematical work on. It provides IPy Notepad running
-matplotlib, pandas, numpy and other tools.
-
-Create the notebook folder in your home directory (on the host machine)::
-
-    mkdir ~/notebook
+numpy, scipy, sympy, matplotlib pandas and other tools.
 
 Now from the ipynotepad directory start the machine::
 
     vagrant up
 
+    # The machine will ask for admin access as it wants to set up
+    # the 'www.ipynotepad' hostname entry in your /etc/hosts
+
 This will take a few minutes as it download and provisions the machine. When
 the command complete you can open your web browser and go to:
 
-    http://192.168.43.176:10080/
-
-Or, If you set up the /etc/hosts with local dns set up:
-
-    http://notepad.example.com:10080
+    http://www.ipynotepad/
 
 Handy OSX Command line::
 
@@ -221,8 +144,13 @@ Handy OSX Command line::
 Now, click on the "New notebook" button. In the main right hand side type the
 following into a "cell" and press shift-enter to execute::
 
-    x = randn(10000)
-    hist(x, 100)
+    x = hist(randn(1000), 100)
+
+This should produce something like:
+
+.. image:: hist.png
+    :width: 50%
+    :align: center
 
 Have a look a matplotlib gallery. You can paste any of the demo's source code
 into a cell and execute it.
@@ -231,3 +159,15 @@ into a cell and execute it.
 
 If the machine is destroyed / recreated the notebooks will still be preserved
 on the host computer.
+
+
+devops.ini
+~~~~~~~~~~
+
+To run the ipynotepad machine the follow devops.ini entry should be present::
+
+    [ipynotepad]
+    address=192.168.67.39
+    box_url=https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
+    box_img=trusty-server-cloudimg-amd64-vagrant-disk1.box
+
