@@ -53,7 +53,7 @@ ipynotepad
     :align: center
 
 A machine to do mathematical work on. It provides IPy Notepad running
-numpy, scipy, sympy, matplotlib pandas and other tools.
+numpy, scipy, sympy, matplotlib, pandas and other tools.
 
 Now from the ipynotepad directory start the machine::
 
