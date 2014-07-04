@@ -45,6 +45,61 @@ Quick Start
 * On your host machine open http://www.ipynotepad/ and off you go.
 
 
+ipynotepad
+----------
+
+A machine to do mathematical work on. It provides IPy Notepad running
+numpy, scipy, sympy, matplotlib pandas and other tools.
+
+Now from the ipynotepad directory start the machine::
+
+    vagrant up
+
+    # The machine will ask for admin access as it wants to set up
+    # the 'www.ipynotepad' hostname entry in your /etc/hosts
+
+This will take a few minutes as it download and provisions the machine. When
+the command complete you can open your web browser and go to:
+
+    http://www.ipynotepad/
+
+Handy OSX Command line::
+
+    open http://192.168.43.176:10080/
+
+Now, click on the "New notebook" button. In the main right hand side type the
+following into a "cell" and press shift-enter to execute::
+
+    x = hist(randn(1000), 100)
+
+This should produce something like:
+
+.. image:: hist.png
+    :width: 50%
+    :align: center
+
+Have a look a matplotlib gallery. You can paste any of the demo's source code
+into a cell and execute it.
+
+ * http://matplotlib.org/gallery.html
+
+If the machine is destroyed / recreated the notebooks will still be preserved
+on the host computer.
+
+Notebooks are save to your home directory on the host machine by default.
+
+
+devops.ini
+~~~~~~~~~~
+
+To run the ipynotepad machine the follow devops.ini entry should be present::
+
+    [ipynotepad]
+    address=192.168.67.39
+    box_url=https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
+    box_img=trusty-server-cloudimg-amd64-vagrant-disk1.box
+
+
 Needed
 ------
 
@@ -116,58 +171,3 @@ stop::
 
     # Shutdown the machine.
     vagrant halt
-
-
-
-ipynotepad
-----------
-
-A machine to do mathematical work on. It provides IPy Notepad running
-numpy, scipy, sympy, matplotlib pandas and other tools.
-
-Now from the ipynotepad directory start the machine::
-
-    vagrant up
-
-    # The machine will ask for admin access as it wants to set up
-    # the 'www.ipynotepad' hostname entry in your /etc/hosts
-
-This will take a few minutes as it download and provisions the machine. When
-the command complete you can open your web browser and go to:
-
-    http://www.ipynotepad/
-
-Handy OSX Command line::
-
-    open http://192.168.43.176:10080/
-
-Now, click on the "New notebook" button. In the main right hand side type the
-following into a "cell" and press shift-enter to execute::
-
-    x = hist(randn(1000), 100)
-
-This should produce something like:
-
-.. image:: hist.png
-    :width: 50%
-    :align: center
-
-Have a look a matplotlib gallery. You can paste any of the demo's source code
-into a cell and execute it.
-
- * http://matplotlib.org/gallery.html
-
-If the machine is destroyed / recreated the notebooks will still be preserved
-on the host computer.
-
-
-devops.ini
-~~~~~~~~~~
-
-To run the ipynotepad machine the follow devops.ini entry should be present::
-
-    [ipynotepad]
-    address=192.168.67.39
-    box_url=https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
-    box_img=trusty-server-cloudimg-amd64-vagrant-disk1.box
-
