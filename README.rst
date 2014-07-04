@@ -48,6 +48,10 @@ Quick Start
 ipynotepad
 ----------
 
+.. image:: hist.png
+    :width: 50%
+    :align: center
+
 A machine to do mathematical work on. It provides IPy Notepad running
 numpy, scipy, sympy, matplotlib pandas and other tools.
 
@@ -62,10 +66,6 @@ This will take a few minutes as it download and provisions the machine. When
 the command complete you can open your web browser and go to:
 
     http://www.ipynotepad/
-
-Handy OSX Command line::
-
-    open http://192.168.43.176:10080/
 
 Now, click on the "New notebook" button. In the main right hand side type the
 following into a "cell" and press shift-enter to execute::
