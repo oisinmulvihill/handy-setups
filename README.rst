@@ -137,8 +137,13 @@ Handy OSX Command line::
 Now, click on the "New notebook" button. In the main right hand side type the
 following into a "cell" and press shift-enter to execute::
 
-    x = randn(10000)
-    hist(x, 100)
+    x = hist(randn(1000), 100)
+
+This should produce something like:
+
+.. image:: working-control.jpg
+    :width: 50%
+    :align: center
 
 Have a look a matplotlib gallery. You can paste any of the demo's source code
 into a cell and execute it.
