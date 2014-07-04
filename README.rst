@@ -141,7 +141,7 @@ following into a "cell" and press shift-enter to execute::
 
 This should produce something like:
 
-.. image:: working-control.jpg
+.. image:: hist.png
     :width: 50%
     :align: center
 
