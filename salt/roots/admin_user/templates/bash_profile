@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+#
+# Keeping this empty and moving code into .bashrc normal_login function.
+#
+
+# source .bashrc if it's there
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+fi

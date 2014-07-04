@@ -1,0 +1,65 @@
+#!/bin/bash
+#
+# The set up for the vagrant 'ipynotepad' box instance run locally.
+#
+# Oisin Mulvihill
+# 2014-07-04
+#
+export SCRIPTLIBDIR=${SCRIPTLIBDIR:-../scriptlib}
+
+echo "sourcing $SCRIPTLIBDIR/vagranthelpers.sh"
+source $SCRIPTLIBDIR/vagranthelpers.sh
+
+if [ $? -ne "0" ] ; then
+    echo "Error source-ing '$SCRIPTLIBDIR/vagranthelpers.sh'!"
+
+else
+    configure_saltstack_env "ipynotepad"
+
+    if [ $? -ne "0" ] ; then
+        echo "configure_saltstack_env() failed!"
+
+    else
+        if [ "$1" == "upgrade" ] ; then
+            echo "Shutting down existing box."
+            vagrant destroy -f
+
+            echo "Removing existing template: $VAGRANT_BOX"
+            vagrant box remove $VAGRANT_BOX >/dev/null 2>&1
+
+            echo "Add box template: VAGRANT_BOX=$VAGRANT_BOX VAGRANT_BOX_URL=$VAGRANT_BOX_URL"
+            vagrant box add $VAGRANT_BOX $VAGRANT_BOX_URL
+
+            echo "Starting box download and running the machine."
+            vagrant up --no-provision
+
+        elif [ "$1" == "provision" ] ; then
+            # Make sure the salt-master is ready and has the minion key. Not
+            # ideal. Need to sort out why this breaks after packaging.
+            #
+            vagrant ssh -c '/usr/bin/sudo /sbin/restart salt-master'
+
+            # make sure the /etc/hosts entries are set up.
+            vagrant hostmanager
+
+            # do the actual provision now
+            vagrant provision
+
+        else
+            recover_box
+
+            if [ "$1" == "up" ] ; then
+                # make sure the /etc/hosts entries are set up.
+                vagrant hostmanager
+
+                # force no provisioning as this machine should be ready without
+                vagrant up --no-provision
+
+            else
+                vagrant $@
+            fi
+        fi
+    fi
+fi
+
+

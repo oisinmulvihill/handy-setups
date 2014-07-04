@@ -1,0 +1,125 @@
+#!/bin/bash
+alias ll='ls --color=auto'
+alias rmpyc="find . -iname '*.pyc' -exec rm {} \; -print"
+alias rmtil="find . -iname '*~' -exec rm {} \; -print"
+alias rmds="find . -iname '\.DS_Store' -exec rm {} \; -print"
+alias gst="git status"
+alias gci="git commit -am "
+alias rmegg='find . -type f -iname '\''*.egg'\'' -exec rm {} \; -print'
+
+alias taillogs='sudo tail -f /var/log/mongodb/mongodb.log /var/log/supervisor/*.log'
+
+export EDITOR=vi
+
+# Set the colour for ls --colour
+#
+#http://www.bigsoft.co.uk/blog/index.php/2008/04/11/configuring-ls_colors
+#eval 'dircolors ~/cfg/DIR_COLORS'
+#
+LS_COLORS='no=00:fi=00:di=01;36:ln=04;93:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=01;32:*.cmd=01;32:*.exe=01;32:*.com=01;32:*.btm=01;32:*.bat=01;32:*.sh=01;32:*.csh=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tz=01;31:*.rpm=01;31:*.cpio=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.xbm=01;35:*.xpm=01;35:*.png=01;35:*.tif=01;35:';
+export LS_COLORS
+
+# project_admin env variable to override default location. This will but the
+# location into the host machine mounted folder instead.
+#
+export PYTHON_EGG_CACHE=$HOME/.python-eggs
+
+
+function normal_login() {
+    # Attempt to set up git, mercurial, ssh. Redo each time (a new shell is
+    # started) to make sure that they are always up to date.
+    #
+    HOST_HOME_MNT=~/host_home
+
+    if [ -x $HOST_HOME_MNT ];
+    then
+        # The mounted directory is present. Check if the git, mercurial and
+        # other things are present and copy them in
+        COPY_FILES=".hgrc .tmux.conf .vim .vimrc"
+        for f in $COPYFILES; do
+            if [ -f "$HOST_HOME_MNT/$f" ]; then
+                #echo "coping '$f'."
+                cp -r $HOST_HOME_MNT/$f ~/$f
+            fi
+        done
+
+        # Symlink .ssh
+        [ ! -h ~/.ssh -a ! -d ~/.ssh ] && ln -s $HOST_HOME_MNT/.ssh ~/.ssh
+    fi
+
+    PS1='\[\e]0;\w\a\]\n\[\e[1;36m\]\u\[\e[0m\]@\[\e[1;32m\]\h \[\e[31m\][\[\e[33m\]\W\[\e[31m\]]\[\e[0m\]\n\$ '
+    export=PS1
+
+    #export PYTHON=`which python`
+    which virtualenvwrapper.sh > /dev/null 2>&1
+    if [ "$?" == "0" ];
+    then
+        # export WORKON_HOME=$HOME/virtualenvs
+        # export VIRTUALENVWRAPPER_PYTHON=$PYTHON
+        # export VIRTUALENVWRAPPER_LOG_DIR=$HOME
+        # export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv
+        source `which virtualenvwrapper.sh`
+
+        echo
+        echo "----------------------------------------------------------------"
+        echo "The following projects are available to 'workon':"
+        echo "----------------------------------------------------------------"
+        # strip out the ==== line in the output:
+        echo `lsvirtualenv | grep -v '='`
+        echo
+    fi
+
+    # Execute host-machine shell preferences
+    PREFS_DIR="$HOST_HOME_MNT/.vagrant.d/prefs/shell"
+    for pref in "$PREFS_DIR/global.sh" "$PREFS_DIR/{{ grains['nodename'] }}.sh"; do
+        if [ -f "$pref" ]; then
+            echo "Executing host preferences $pref"
+            . $pref
+        fi
+    done
+
+    # source custom.sh if it's there
+    if [ -f ~/custom.sh ]; then
+        source ~/custom.sh
+    fi
+
+    # Source files installed to provided extra functionality by other modules.
+    #
+    export SCRIPTLIBDIR={{ scriptlibdir }}
+
+    pushd .
+    if [ -n $SCRIPTLIBDIR ]; then
+        cd $SCRIPTLIBDIR
+        for f in `ls *.sh` ;
+        do
+            echo "Sourcing script '$f' "
+            source $f
+        done
+        popd
+    fi
+
+    [[ -s /home/vagrant/.nvm/nvm.sh ]] && . /home/vagrant/.nvm/nvm.sh # This loads NVM
+
+}
+
+function ssh_login() {
+    # normal loging ops:
+    # echo
+    # echo "SSH LOGIN FROM: <$SSH_CLIENT>"
+    # echo
+    normal_login
+}
+
+# Decided what to finish with based on how the user logged in
+#
+# elif [ "$SSH_TTY" == "" -a "$SSH_CLIENT" != "" ]; then
+#     # SCP LOGIN: ssh_tty<> ssh_client<IP PORT>"
+#     echo
+#     echo "SCP LOGIN FROM: <$SSH_CLIENT>"
+#     echo
+
+if [ "$SSH_TTY" -a "$SSH_CLIENT" != "" ]; then
+    # SSH LOGIN: ssh_tty<TTY Device> ssh_client<IP PORT>"
+    ssh_login
+
+fi

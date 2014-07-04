@@ -1,0 +1,25 @@
+set statusline=%<%f%h%m%r%w%y%=%l/%L,%c\ %P\ \|\ %n
+set nocompatible                        " not compatible with vi
+set showmode                            " show mode in mode line
+set modeline                            " show mode line
+set ignorecase                          " ignore case when searching
+set incsearch                           " search while typing
+set backspace=indent,eol,start          " super backspacing
+set smartcase                           " smart searching
+set tabstop=4                           " default tabs to 4 spaces
+set shiftwidth=4                        " match default tab spacing
+set hlsearch                            " highlight search results
+set autoindent                          " auto indent new lines
+set history=200                         " set command and search history
+set noerrorbells                        " don't annoy me
+set novisualbell                        " disable visual bell
+set report=0                            " always report lines changed
+set showmatch                           " show matching brackets
+set foldenable                          " enable folding
+set foldmethod=indent                   " fold lines with equal indent
+set foldlevel=100                       " set fold close level
+set laststatus=2                        " always show status line
+set pastetoggle=<C-p>                   " Ctrl+p to toggle pasting
+set spellfile=~/.vimspell.add"          " my words
+set t_Co=256                            " use all 256 colors
+set autoread                            " reload files changed outside vim"

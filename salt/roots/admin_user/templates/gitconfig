@@ -1,0 +1,6 @@
+[user]
+    name = vagrant
+    email = dev@dev.pythonpro.eu
+
+[url "https://"]
+insteadOf = git://

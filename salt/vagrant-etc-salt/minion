@@ -1,0 +1,4 @@
+id: ipynotepad-01
+master: localhost
+master_port: 4506
+pki_dir: /etc/salt/keys
