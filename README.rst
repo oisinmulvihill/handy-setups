@@ -31,6 +31,9 @@ business of environment set up.
 Quick Start
 -----------
 
+I have vagrant version 1.6.3 and virtualbox version 4.3.12r93733. I'm also
+running on Mac OSX 10.9
+
 * Edit the $HOME/devops.ini and add the ipynotepad settings::
 
     [ipynotepad]
@@ -41,6 +44,8 @@ Quick Start
 * Change into "ipynotepad" directory.
 
 * Call "./box up" to start the machine.
+
+* Call "./box provision" to set up all parts.
 
 * On your host machine open http://www.ipynotepad/ and off you go.
 
