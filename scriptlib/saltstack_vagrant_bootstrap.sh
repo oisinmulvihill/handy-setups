@@ -20,8 +20,11 @@ fi
 sudo rm -rf /etc/salt || die "Failed to clear keys"
 sudo cp -r /srv/etc-salt /etc/salt || die "Failed to copy keys"
 
-sudo start salt-master || sudo restart salt-master || die "Failed to start master"
-sudo start salt-minion || sudo restart salt-master || die "Failed to start minion"
+pgrep salt-master && echo "Salt Master is running." && sudo restart salt-master || die "Failed to restart master"
+pgrep salt-master || sudo start salt-master || die "Failed to start master"
+
+pgrep salt-minion && echo "Salt Minion is running." && sudo restart salt-minion || die "Failed to restart minion"
+pgrep salt-minion || sudo start salt-minion || die "Failed to start minion"
 
 $SCRIPTLIB/saltstack_accept_key.sh $accept_key $machine_name;
 

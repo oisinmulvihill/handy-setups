@@ -32,9 +32,9 @@ Quick Start
 -----------
 
 I have vagrant version 1.6.3 and virtualbox version 4.3.12r93733. I'm also
-running on Mac OSX 10.9
+running on Mac OSX 10.9.
 
-* Edit the $HOME/devops.ini and add the ipynotepad settings::
+* Edit the "devops.ini" configuration file in your home directory and add the ipynotepad settings::
 
     [ipynotepad]
     address=192.168.67.39

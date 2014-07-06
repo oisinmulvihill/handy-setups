@@ -21,13 +21,9 @@ function bootstrap() {
         return 0
     fi
 
-    sudo apt-get -y --force-yes update || die "Failed to update package index"
-    sudo apt-get -y --force-yes install curl python-pip || die "Failed to install system dependencies"
-    sudo pip install docker-py || die "Failed to install docker-py"
+    #sudo apt-get -y --force-yes update || die "Failed to update package index"
 
-    (curl -L https://bootstrap.saltstack.com |
-        sudo sh -s -- -M -g https://github.com/saltstack/salt.git git upstream/2014.1) \
-     ||  die saltstack-bootstrap "Salt bootstrap failed"
+    sudo apt-get -y install curl salt-master salt-minion || die "Failed to install system dependencies"
 
     $SCRIPTLIB/saltstack_accept_key.sh $accept_key;
 
