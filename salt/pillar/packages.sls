@@ -11,5 +11,5 @@ ipynotepad:
   upstart_config: /etc/init/ipynotepad.conf
   service_name: ipynotepad
   run_as: vagrant
-  command_line: ipython notebook --pylab inline --pprint --port 14521 --ip=* --notebook-dir=/home/vagrant/dev_home
+  command_line: ipython notebook --pylab inline --pprint --port 14521 --ip=* --notebook-dir=/home/vagrant/host_home
   log_file: /home/vagrant/ipynotepad.log
