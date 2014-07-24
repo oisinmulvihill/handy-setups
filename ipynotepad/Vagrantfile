@@ -41,10 +41,10 @@ Vagrant.configure("2") do |config|
   config.hostmanager.manage_host = true
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
-  config.vm.define 'dev-box' do |node|
-    node.vm.hostname = 'salt.pypro.dev'
+  config.vm.define 'ipynotepad' do |node|
+    node.vm.hostname = 'salt'
     node.vm.network :private_network, ip: VAGRANT_ADDRESS
-    node.hostmanager.aliases = %w(www.ipynotepad ipynotepad)
+    node.hostmanager.aliases = %w(www.ipynotepad ipynotepad salt)
   end
 
 

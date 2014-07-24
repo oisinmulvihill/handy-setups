@@ -28,8 +28,8 @@ automated set up allows you to concentrate on development and not the annoying
 business of environment set up.
 
 
-Quick Start
------------
+Quick Start (ipynotepad)
+------------------------
 
 I have vagrant version 1.6.3 and virtualbox version 4.3.12r93733. I'm also
 running on Mac OSX 10.9
@@ -103,6 +103,28 @@ To run the ipynotepad machine the follow devops.ini entry should be present::
     address=192.168.67.39
     box_url=https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
     box_img=trusty-server-cloudimg-amd64-vagrant-disk1.box
+
+
+
+dockerbox
+---------
+
+This is a container for running dockers mainly on MacOSX. Linux can run docker
+natively so this isn't needed there.
+
+This sets up the /etc/hosts entries for www.dockerbox pointing it at the current
+IP.
+
+devops.ini
+~~~~~~~~~~
+
+To run the ipynotepad machine the follow devops.ini entry should be present::
+
+    [dockerbox]
+    address=192.168.67.42
+    box_url=https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
+    box_img=trusty-server-cloudimg-amd64-vagrant-disk1.box
+
 
 
 Needed
