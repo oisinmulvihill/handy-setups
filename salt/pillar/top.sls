@@ -4,3 +4,6 @@ base:
 
   'ipynotepad-*':
     - pypro.dev
+
+  'dockerbox-*':
+    - pypro.dev
