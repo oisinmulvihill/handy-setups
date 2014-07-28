@@ -29,6 +29,7 @@
     ('gemrc', '/home/{}/.gemrc'.format(local_user)),
     ('sqliterc', '/home/{}/.sqliterc'.format(local_user)),
     ('toprc', '/home/{}/.toprc'.format(local_user)),
+    ('htoprc', '/home/{}/.config/htop/htoprc'.format(local_user)),
     ('environment', '/etc/environment'),
     ('bashrc', '/home/{}/.bashrc'.format(local_user)),
     ('bash_profile', '/home/{}/.bash_profile'.format(local_user)),
