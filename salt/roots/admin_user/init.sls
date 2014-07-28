@@ -22,6 +22,27 @@
 {% endfor %}
 
 
+# Build any directories that maybe required by set up files:
+#
+{% set dot_files = [
+    ('/home/{}/.config/htop'.format(local_user)),
+
+] %}
+{% for dep_path in dot_files %}
+{{ dep_path }}:
+  file.directory:
+    - user: {{ local_user }}
+    - group: {{ local_group }}
+    - mode: 755
+    - makedirs: True
+    - recurse:
+      - user
+      - group
+      - mode
+
+{% endfor %}
+
+
 # Set up the non-template files:
 #
 {% set dot_files = [
