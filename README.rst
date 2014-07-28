@@ -62,10 +62,15 @@ numpy, scipy, sympy, matplotlib, pandas and other tools.
 
 Now from the ipynotepad directory start the machine::
 
-    vagrant up
+    # first time create the machine:
+    ./box up
 
     # The machine will ask for admin access as it wants to set up
     # the 'www.ipynotepad' hostname entry in your /etc/hosts
+
+    # set the machine up:
+    ./box provision
+
 
 This will take a few minutes as it download and provisions the machine. When
 the command complete you can open your web browser and go to:
@@ -115,6 +120,7 @@ natively so this isn't needed there.
 This sets up the /etc/hosts entries for www.dockerbox pointing it at the current
 IP.
 
+
 devops.ini
 ~~~~~~~~~~
 
@@ -122,9 +128,8 @@ To run the ipynotepad machine the follow devops.ini entry should be present::
 
     [dockerbox]
     address=192.168.67.42
-    box_url=https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
-    box_img=trusty-server-cloudimg-amd64-vagrant-disk1.box
-
+    box_url=https://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box
+    box_img=trusty-server-cloudimg-amd64-juju-vagrant-disk1.box
 
 
 Needed
@@ -144,57 +149,54 @@ Download VirtualBox and Extension Pack:
 Vagrant
 ~~~~~~~
 
-Vagrant is used to mange virtualbox. It needs VirtualBox installed prior to
-use.
+Vagrant is used to mange virtualbox instances. It needs VirtualBox installed
+prior to use. In the machine set ups I use a wrapper script called "box". This
+is in each directory containing the "Vagrantfile". This wraps the vagrant
+command and allows me to have set up in the "devops.ini" file. The vagrant
+commands all work with the "box" script e.g. ./box up, ./box reload, ./box ssh
 
  * Vagrant 1.6.0: http://www.vagrantup.com/downloads.html
 
-The following aliases are handy to add to your .bash_profile or .bashrc::
 
-    # vagrant aliases:
-    #
-    alias v="vagrant"
-    alias vst="vagrant status"
-    alias vup="vagrant up"
-    alias vpr="vagrant provision"
-    alias vhl="vagrant halt"
-    alias vre="vagrant reload"
-    alias vssh="vagrant ssh"
-
-This will save lots of typing.
-
-
-Common Vagrant Commands
-~~~~~~~~~~~~~~~~~~~~~~~
+Common Commands
+```````````````
 
 All commands are run from the machine directory i.e. the directory containing
 the Vagrantfile.
 
-ssh into dev box::
+ssh into a box::
 
-    vagrant ssh
+    ./box ssh
 
 start a dev box::
 
     # Start the machine and run the provision.
     #
-    # Don't try and set up two machines at the same time. Only do "vagrant up"
+    # Don't try and set up two machines at the same time. Only do "./box up"
     # one machine at a time.
     #
-    vagrant up
+    ./box up
 
 (re)run provision::
 
     # If you want to rerun the machine manifest and apply changes when the
     # machine is running:
-    vagrant provision
+    ./box provision
 
 apply changes after Vagrant file has been changed::
 
     # restart the machine and run provision.
-    vagrant reload
+    ./box reload
 
 stop::
 
     # Shutdown the machine.
-    vagrant halt
+    ./box halt
+
+hostmanager::
+
+    # (re)set up the hostname entries in /etc/hosts based on the current IP
+    # set up in "devops.ini". This is performed automatically, however its
+    # useful to know this command.
+    ./box hostmanager
+

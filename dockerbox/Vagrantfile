@@ -11,7 +11,7 @@ SCRIPTLIBDIR = ENV['SCRIPTLIBDIR'] || '../scriptlib'
 
 VAGRANT_BOX = ENV['VAGRANT_BOX'] || '-error-not-set-'
 
-VAGRANT_ADDRESS = ENV['VAGRANT_ADDRESS'] || '192.168.67.39'
+VAGRANT_ADDRESS = ENV['VAGRANT_ADDRESS'] || '192.168.67.42'
 
 # General params that might need tweaking later on.
 VAGRANT_MEMORY_SIZE = ENV['VAGRANT_MEMORY_SIZE'] || '1048'
@@ -42,17 +42,15 @@ Vagrant.configure("2") do |config|
   config.hostmanager.manage_host = true
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
-  config.vm.define 'ipynotepad' do |node|
-    node.vm.hostname = 'salt'
+  config.vm.define 'dockerbox' do |node|
+    node.vm.hostname = 'dockerbox'
     node.vm.network :private_network, ip: VAGRANT_ADDRESS
-    node.hostmanager.aliases = %w(www.ipynotepad ipynotepad salt)
+    node.hostmanager.aliases = %w(www.dockerbox dockerbox salt)
   end
-
 
   # Mounted points:
   #
   config.vm.synced_folder ENV['HOME'], '/home/vagrant/host_home'
-
 
   # Saltstack mounts and other utility mounts
   config.vm.synced_folder "#{VAGRANT_SALT_ROOT}/vagrant-etc-salt/", "/srv/etc-salt"
@@ -61,18 +59,14 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "#{VAGRANT_SALT_ROOT}/pillar/", "/srv/pillar/"
   config.vm.synced_folder SCRIPTLIBDIR, '/vagrant/scriptlib'
 
-  # Copy in salt keys, accept the new minion keys and kick off the initial provision
-  # config.vm.provision :shell, :inline => "sudo /bin/bash /vagrant/scriptlib/saltstack_master_bootstrap.sh"
-  # config.vm.provision :shell, :inline => "sudo /bin/bash /vagrant/scriptlib/saltstack_vagrant_bootstrap.sh ipynotepad-01"
-  # config.vm.provision :shell, :inline => "sudo salt-call -l debug state.highstate"
+  #config.vm.provision :shell, :inline => "sudo apt-get install -y --force-yes bzr"
 
   config.vm.provision :salt do |salt|
     salt.run_highstate = true
-    salt.minion_config = "#{VAGRANT_SALT_ROOT}/vagrant-etc-salt/minion_ipynotepad"
+    salt.minion_config = "#{VAGRANT_SALT_ROOT}/vagrant-etc-salt/minion_dockerio"
     salt.verbose = true
     # Disable autostart of minion
     salt.bootstrap_options = "-X"
   end
-
 
 end
