@@ -1,4 +1,13 @@
 id: ipynotepad-01
-master: localhost
-master_port: 4506
-pki_dir: /etc/salt/keys
+#master: localhost
+#master_port: 4506
+#pki_dir: /etc/salt/keys
+file_client: local
+file_roots:
+  base:
+    - /srv/salt/
+    # downloaded from https://github.com/saltstack-formulas
+    - /srv/saltstack-formula/docker-formula/
+    - /srv/saltstack-formula/node-formula/
+    - /srv/saltstack-formula/nginx-formula/
+failhard: True

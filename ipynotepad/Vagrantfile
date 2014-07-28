@@ -61,8 +61,17 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder SCRIPTLIBDIR, '/vagrant/scriptlib'
 
   # Copy in salt keys, accept the new minion keys and kick off the initial provision
-  config.vm.provision :shell, :inline => "sudo /bin/bash /vagrant/scriptlib/saltstack_master_bootstrap.sh"
-  config.vm.provision :shell, :inline => "sudo /bin/bash /vagrant/scriptlib/saltstack_vagrant_bootstrap.sh ipynotepad-01"
-  config.vm.provision :shell, :inline => "sudo salt-call -l debug state.highstate"
+  # config.vm.provision :shell, :inline => "sudo /bin/bash /vagrant/scriptlib/saltstack_master_bootstrap.sh"
+  # config.vm.provision :shell, :inline => "sudo /bin/bash /vagrant/scriptlib/saltstack_vagrant_bootstrap.sh ipynotepad-01"
+  # config.vm.provision :shell, :inline => "sudo salt-call -l debug state.highstate"
+
+  config.vm.provision :salt do |salt|
+    salt.run_highstate = true
+    salt.minion_config = "#{VAGRANT_SALT_ROOT}/vagrant-etc-salt/minion"
+    salt.verbose = true
+    salt.bootstrap_options = "-X"  # Disable autostart of minion
+    #salt.pillar({})
+  end
+
 
 end
